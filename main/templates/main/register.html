@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'main/css/register.css' %}">
+    <link rel="icon" type="image/.ico" sizes="16x16" href="{% static 'main/img/avatar.png' %}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Control App - Sign Up</title>
+</head>
+<body>
+
+    <section>
+        <div class="sign-up_container">
+            <div class="main_block_sign-up_container">
+                <div class="title_main_block">
+                    <h1>Sign Up</h1>
+                    <p>Face Control App</p>
+                </div>
+                <div class="support_sign-up_main_block">
+                    <a href="" class="with_google_sign-up">
+                        <img src="https://preview.keenthemes.com/metronic8/demo16/assets/media/svg/brand-logos/google-icon.svg" alt="logo_google">
+                        Sign in with Google
+                    </a>
+                    <a href="" class="with_apple_sign-up">
+                        <img class="dark_apple_logo" src="https://preview.keenthemes.com/metronic8/demo16/assets/media/svg/brand-logos/apple-black.svg" alt="logo_apple">
+                        <img class="white_apple_logo" src="https://preview.keenthemes.com/metronic8/demo16/assets/media/svg/brand-logos/apple-black-dark.svg" alt="">
+                        Sign in with Apple
+                    </a>
+                </div>
+                <div class="or_just_with_email">
+                    <p>Or with email</p>
+                </div>
+                <div class="input_forms_sign-up">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <label for="user_image">
+                            <input type="file" name="photo" id="user_image" class="form-control" accept="image/*">
+                        </label><br>
+                        
+                        <br><label>
+                            <input type="text" placeholder="Full name" name="full_name" class="form_input_name" id="input_name" autocomplete="off" oninput="checkPassword()">
+                        </label><br>
+                        <br><label>
+                            <input type="text" placeholder="Username" name="username" class="form_input_username" id="input_username" autocomplete="off" oninput="checkPassword()">
+                        </label>
+                        <p class="validate_check_password" id="validate_username">Use 5 or more characters with a mix of only letters.</p>
+                        <div class="position-relative">
+                            <label>
+                                <input type="password" placeholder="Password" name="password" class="form_input_password" id="input_password" oninput="checkPassword()">
+                                <span class="check_password_span_box_block" id="passwordCheckButton">
+                                    <i class="unvisibility_check_password" id="unvisibility_check_password">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#181c32" class="bi bi-eye-slash" viewBox="0 0 16 16">
+                                            <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"></path>
+                                            <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"></path>
+                                            <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"></path>
+                                        </svg>
+                                    </i>
+                                    <i class="visibility_check_password" id="visibility_check_password">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#181c32" class="bi bi-eye" viewBox="0 0 16 16">
+                                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"></path>
+                                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"></path>
+                                        </svg>
+                                    </i>
+                                </span>
+                            </label>
+                        </div>
+                        <div class="check_successfully_password">
+                            <div class="dragdown_block_check_password" id="dragdown_first"></div>
+                            <div class="dragdown_block_check_password" id="dragdown_second"></div>
+                            <div class="dragdown_block_check_password" id="dragdown_third"></div>
+                            <div class="dragdown_block_check_password" id="dragdown_fourth"></div>
+                        </div>
+                        <p class="validate_check_password">Use 8 or more characters with a mix of letters, numbers & symbols.</p>
+                        <label>
+                            <input type="password" placeholder="Repeat Password" name="repeat_password" class="form_input_repeat_password" id="input_repeat_password" oninput="checkPassword()">
+                        </label>
+                        <div class="checkbox_accept_sign-up" id="checkbox_accept_sign-up">
+                            <div class="form-check form-check-inline">
+                                <input type="checkbox" name="checkbox" id="checkedBox" oninput="checkPassword()">
+                                <span>I Accept the <a href="#">Terms</a></span>
+                            </div>
+                            <div class="must_accept_checkbox">
+                                <p class="d-block">You must accept the terms and conditions</p>
+                            </div>
+                        </div>
+                        {% for message in messages %}
+                            <p style="color: red; font-size: 13px; display: flex; justify-content: flex-start; align-items: flex-start; margin-top: 20px;">{{ message }}</p>
+                        {% endfor %}
+                        <button type="submit" class="form_sign_up_button" id="submit_button" disabled oninput="checkPassword()">Sign up</button>
+                    </form>
+                </div>
+                <div class="have_account_sign-in">
+                    <p>Already have an Account? <a href="{% url 'login' %}">Sign in</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="image_container">
+        </div>
+    </section>
+
+    <script src="{% static 'main/js/register.js' %}"></script>
+</body>
+</html>

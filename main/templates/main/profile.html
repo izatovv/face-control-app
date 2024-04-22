@@ -1,0 +1,157 @@
+<!doctype html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'main/css/profile.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Face Control App - Profile</title>
+</head>
+<body>
+
+    <section>
+        <div class="section_container">
+        <div class="wrapper">
+            <div class="main_profile_redactor_container">
+
+                <div class="title_main_profile_redactor_block">
+                    <h1>Overview</h1>
+                    <p>Home - Account</p>
+                </div>
+
+                <div class="information_main_profile_redactor_block">
+                    <div class="main_information_profile_block">
+                        {% if not profile.photo.url %}
+                            <div class="image_main_information_block" style="background-image: url('https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=461&q=80');"></div>
+                        {% else %}
+                            <div class="image_main_information_block" style="background-image: url('{{ profile.photo.url }}');"></div>
+                        {% endif %}
+                        <div class="user_information_profile_block">
+                            <div class="fullname_user_information_block">
+                                {% if profile.user.first_name %}
+                                    <h1>{{ profile.user.first_name }}</h1>
+                                {% else %}
+                                    <h1>Anonymous</h1>
+                                {% endif %}
+                                <i>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#009ef7" class="bi bi-patch-check-fill" viewBox="0 0 16 16">
+                                        <path d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708z"></path>
+                                    </svg>
+                                </i>
+                            </div>
+                            <div class="additional_user_information_block">
+                                <div class="geolocation_user_information_block">
+                                    <i>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#474761" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"></path>
+                                        </svg>
+                                    </i>
+                                    <h1>{{ profile.country }}</h1>
+                                </div>
+                                <div class="mail_user_information_block">
+                                    <i>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#474761" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                                             <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"></path>
+                                        </svg>
+                                    </i>
+                                    <h1>{{ profile.user.email }}</h1>
+                                </div>
+                            </div>
+                            <div class="balance_user_information_block">
+                                <div class="check_balance_user_block">
+                                    <div class="title_check_balance_user_block">
+                                        <i>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#009ef7" class="bi bi-arrow-up-short" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"></path>
+                                            </svg>
+                                        </i>
+                                        <h1>{{ user_count }}</h1>
+                                    </div>
+                                    <p>Users</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="completion_information_profile_block">
+                        <a href="{% url 'logout' %}" class="replenish_balance_user_block">
+                            Logout
+                        </a>
+                        <div class="percentage_completion_user_block">
+                            <div class="title_percentage_completion_block">
+                                <h1>Profile Completion</h1>
+                                <p>{{ completion_percentage }}%</p>
+                            </div>
+                            <div class="background_range_question_block">
+                                {% if empty_fields == 0 %}
+                                    <div class="range_question_value_block" style="width: 100%;"></div>
+                                {% else %}
+                                    <div class="range_question_value_block" style="width: {{ completion_percentage }}%;"></div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile_detail_profile_redactor_block">
+                    <div class="title_profile_detail_redactor_block">
+                        <h1>Profile Details</h1>
+                        <a href="{% url 'edit_profile' %}">Edit Profile</a>
+                    </div>
+                    <div class="main_information_profile_detail_block">
+                        <div class="profile_detail_info">
+                            <p>Full Name</p>
+                            <h1>{{ profile.user.first_name }}</h1>
+                        </div>
+                        <div class="profile_detail_info">
+                            <p>Email</p>
+                            <h1>{{ profile.user.email }}</h1>
+                        </div>
+                        <div class="profile_detail_info">
+                            <p>Mobile phone</p>
+                            <h1>{{ profile.phone_number }}</h1>
+                        </div>
+                        <div class="profile_detail_info">
+                            <p>Country</p>
+                            <h1>{{ profile.country }}</h1>
+                        </div>
+                    </div>
+                </div>
+
+                {% if articles.count > 0 %}
+                    <div class="my_articles_profile_block">
+                        <div class="title_my_articles_profile_block">
+                            <h1>My Articles</h1>
+                            <a href="{% url 'blog' %}">Create Article</a>
+                        </div>
+                        <ul class="list_my_articles_profile_block">
+                            {% for article in articles %}
+                                <li class="article_profile_block">
+                                    <div class="main_information_article_profile_block">
+                                        <div class="cover_image_article_profile_block" style="background-image: url('{{ article.image.url }}')"></div>
+                                        <div class="title_article_profile_block">
+                                            <h1>{{ article.title }}</h1>
+                                            <p>{{ article.created_date|date:"d M Y" }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="description_article_profile_block">
+                                        <p>{{ article.summary }}</p>
+                                    </div>
+                                    <div class="button_article_profile_block">
+                                        <a href="{% url 'article-detail' article.id %}">Read More</a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+    </section>
+
+</body>
+</html>
